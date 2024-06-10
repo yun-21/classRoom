@@ -1,0 +1,40 @@
+/* body 요소의 첫 번째 자식 div 요소를 선택 */
+body > div:nth-child(1){
+  display: flex;
+  justify-content: space-between;
+}
+
+/* body 요소의 첫 번째 자식 div 요소의 첫 번째 자식 section 요소를 선택 */
+body > div:nth-child(1) > section:first-child{
+  flex-basis:60%;
+  height: 200px;
+}
+
+/* body 요소의 첫 번째 자식 div 요소의 첫 번째 자식 section 요소를 제외한 모든 section 요소를 선택 */
+body>div:nth-child(1)>section:not(:fist-child){
+  flex-basis:20%;
+  height:100px;
+}
+
+/* body 요소의 두 번째 자식 div 요소를 선택 */
+body > div:nth-child(2){
+  display: grid;
+  grid-template-columns: repeat(3,1fr);
+}
+
+/* body 요소의 두 번째 자식 div 요소의 모든 section 요소를 선택 */
+body>div:nth-child(2)>section{
+  border:1px solid black;
+}
+
+/* body 요소와 두 번째 자식 div 요소의 첫 번째 자식 section 요소를 선택 */
+body>div:nth-child(2)>section:nth-child(1){
+  grid-column: 1/3;
+  grid-row:1;
+}
+
+/* body 요소의 두 번째 자식 div 요소의 두 번째 자식 section 요소를 선택 */
+body>div:nth-child(2)>section:nth-child(2){
+  grid-column: 3;
+  grid-row:1/3;
+}
