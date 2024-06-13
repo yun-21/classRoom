@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <div id="root"></div>
+  <script>
+    //Form 컴포넌트
+    const formComponent = (action, method, content)=>{
+      return `
+        <form action="${action}" method="${method}" id="user-form">
+          ${content}
+          <button type="button" id="submit-button">콘솔 확인하기!</button>
+        </form>
+      `;
+    };
+
+    //Input 컴포넌트
+    const inputComponent = (label, id, name, value) => {
+      return `
+        <label for="${id}">${label}:</label>
+        <input type="text" id="${id}" name="${name}" value="${value}" required>
+      `;
+    };
+
+    //전체 컴포넌트
+    const component = (name, age, job)=>{
+      let obj = {
+        name : name,
+        age : age,
+        job : job,
+      };
+
+      //Form content 생성
+      const formContent = `
+        ${inputComponent("이름", "name", "name", obj.name)}
+        ${inputComponent("나이","age","age",obj.age)}
+        ${inputComponent("직업","job","job",obj.job)}
+      `;
+
+      //Form 컴포넌트와 결합
+      return `
+        ${formComponent("/submit","post",formContent)}
+      `;
+    };
+
+    //페이지가 로드될 때 컴포넌트를 렌더링
+    function renderApp(){
+      const root = document.getElementById("root");
+      root.innerHTML = component("신지윤",25,"취준생");
+      //위 innerHTML로 문서가 작성되었으므로
+      
+      //DOM 조작 --------------------------------------------------------
+      //다음 줄인 아래에서 submit-button을 찾을(get)수 있음
+
+      const submitButton = document.getElementById("submit-button");
+      submitButton.addEventListener("click", ()=>{
+        const form = document.getElementById("user-form");
+        const formData = new FormData(form);
+        //편리하게 FormData 객체를 이용하여 데이터를 취합
+        //서버로 전송할 데이터를 취합하는데 사용
+        const data = {};
+        formData.forEach((value,key)=>{
+          data[key]=value;
+        });
+        console.log(data);
+      })
+    }
+    window.addEventListener("DOMContentLoaded", renderApp);
+  </script>
+</body>
+</html>
