@@ -7,7 +7,7 @@ class KimchiJjigae{
   }
 
   //setter 메서드 : foodList를 설정합니다. 배열만 받고, 각 원소는 문자열이어야 합니다.
-  set FoodList(newFoodList){
+  set foodList(newFoodList){
     if(Array.isArray(newFoodList)===false){
       throw new Error("foodList는 배열이어야 합니다.");
     }
