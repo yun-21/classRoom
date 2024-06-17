@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <div id="root"></div>
+  <script>
+    const root = document.getElementById("root");
+    //root.innerHTML = "<ul><li>구하림</li> <li>김보미</li> <li>김수현</li></ul>"
+    //위는 날것의 자바스크립트 DOM API 코드로,
+    //DOM API의 주요 key인 innerHTML에 직접적으로 문자열을 넣어준 사례
+    //직관적이지만 만드는 것도 고생이고, 유지보수도 어려움
+
+    //------------------------------------------------------------
+
+    //아래는 함수형 프로그래밍을 이용한 코드 중, 특히 리액트의 방식을 모사했다.
+    //함수형 프로그래밍은 함수를 값처럼 다루는 일이 비교적 많다.
+    //최신 리액트에는 함수형이 가진 장점을 살리도록 발전하고 있으므로,
+    //'결과값이 달라지는' 일에 적응하는 연습이 필요하다.
+    //호출하기전까지 해독이 어렵다.
+    //역순으로 읽어나가는 것도 하나의 요령
+
+    const names = [
+      "구하림",
+      "김보미",
+      "김수현",
+      "김정수",
+      "문혜림",
+      "배성빈",
+      "백지원",
+      "송이현",
+      "신지윤",
+      "유으뜸",
+      "유호영",
+      "이연승",
+      "이재영",
+      "이종수",
+      "임유진",
+      "정호연",
+      "조우식",
+      "조자연",
+      "최유진",
+      "황재민",
+    ];
+
+    //태그를 만드는 가장 기초적인 형태의 함수
+    //매개변수를 받아서 문자열로 리턴한다.
+    //문자열은 HTML 작성법을 따르므로 위 서술한 innerHTML에 넣어줄 수 있다.
+    const tagCOmponent = (tagName, textNode) => {
+      return `<${tagName}>${textNode}</${tagName}>`;
+    };
+    //arrayString은 '문자열'을 뒤에 덧붙이는 방식이다.
+    //복합대입연산자 +=를 사용하여 문자열을 더해나간다.
+    //화살표 함수와 같은 현대적인 작성법을 제외하면, 가장 기초적인 방식이면서도
+    //가장 직관적인 방식이지만, 자바스크립트의 장점을 살리지 못한다.
+    //이 방식은 절차적 프로그래밍에 가깝다.
+    //절차를 개발자가 읽지 않으면 의도를 파악하기 어렵다.
+    //코드가 짧지만, 긴 경우라면 매우 복잡해진다.
+    const arrayString = (array,componentName) => {
+      let result = "";
+      for(let i = 0; i<array.lenght; i++){
+        result += componentName("li",names[i]);
+      }
+      return result;
+    }
+
+    //arrayPush는 '배열'에 덧붙이는 방식이다.
+    //forEach를 사용하여 배열을 순회하며, 새로운 배열에 값을 넣어나간다.
+    //자바스크립트스러운 메서드들을 잔뜩 사용했다.
+    //메서드 이름 자체가 하나의 의미를 가지고 있어서, 코드를 읽는 사람이
+    //무엇을 하는지 쉽게 파악할 수 있다.
+
+    const arrayPush = (array,componentName)=>{
+      let result = [];
+      array.forEach((name,index)=>{
+        result.push(componentName("li",names[index]));
+      });
+      return result.join(" ");
+    }
+
+    //app함수는 두 가지를 마치 선택지처럼 받도록 if()문을 사용한 사례
+    //본 코드에선 크게 의미는 없지만, '결과물이 달라지는' 경우에는 유용한 개념
+    
+    const app = (isProgrammingType = false) => {
+      if(isProgrammingType===true){
+        //절차적 프로그래밍 procedural programming
+        return `<ul>${arrayString(names,tagCOmponent)}</ul>`;
+      }else{
+        return `<ul>${arrayPush(names,tagComponent)}</ul>`;
+      }
+    };
+    const render = () =>{
+      root.innerHTML=app();
+    }
+    render();
+  </script>
+</body>
+</html>
