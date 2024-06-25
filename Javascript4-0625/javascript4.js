@@ -8,7 +8,7 @@ const vendingMachin = {
   total : 0,
   purchaseItem : function (itemName){
     //this.items == undefined
-    console.log(this.items)
+    console.log(this.items);
     const item = vendingMachin.items.find((item)=>{
       //find 메서드는 조건에 맞는 첫 번째 요소를 반환
       //매우 자주 사용하는 '조회' 메서드
@@ -40,4 +40,4 @@ const userOne = {
 vendingMachin.purchaseItem.call(userOne, "콜라");
 
 //userOne의 total 금액 확인
-console.log(`공욱재의 총 구매 금액은 ${userOne.total}원 입니다.`)
+console.log(`신지윤의 총 구매 금액은 ${userOne.total}원 입니다.`)
