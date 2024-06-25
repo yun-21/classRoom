@@ -7,8 +7,9 @@ const vendingMachin = {
   ],
   total : 0,
   purchaseItem : function (itemName){
+    //this.items == undefined
     console.log(this.items)
-    const item = this.items.find((item)=>{
+    const item = vendingMachin.items.find((item)=>{
       //find 메서드는 조건에 맞는 첫 번째 요소를 반환
       //매우 자주 사용하는 '조회' 메서드
       let result = item.name === itemName;
