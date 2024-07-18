@@ -24,3 +24,5 @@ const closureExample = outerFunction(someData);
 anotehrFunction(); //20
 
 closureExample(); //엥? 왜 15가 아니라 30이지?
+
+outerFunction(someData)();
