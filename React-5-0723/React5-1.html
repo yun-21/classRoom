@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <button id="toggle-button">다크 모드 전환</button>
+    <script>
+        //DOM 요소 선택
+        const body = document.body;
+        const toggleButton = document.getElementById("toggle-button");
+
+        //상태 데이터 객체
+        const stateData = {
+            isDarkMode : false,
+            timeoutId : null, //값이 들어갈 예정
+            styleChange: {
+                light : {
+                    backgroundColor : '#fff',
+                    color:"black"
+                },
+                dark:{
+                    backgroundColor:"#333",
+                    color:"white"
+                }
+            }
+        };
+
+        //스타일 적용 함수
+        function applyStyles(element, styles){
+            for(const styleName in styles){
+                element.style[styleName]=styles[styleName];
+            }
+        }
+
+        //초기 스타일 설정
+        function setInitialStyles(){
+            //Body 스타일 설정
+            const bodyStyles={
+                transition : "background-color 0.3s, color 0.3s",
+                display:'flex',
+                justifyContent:'center',
+                alignItems : 'center',
+                height:'100vh',
+                margin:'0',
+                fontFamily : 'Arial, sans-serif'
+            };
+            applyStyles(body, bodyStyles);
+
+        //버튼 스타일 설정
+        const buttonStyles={
+            padding : "10px 20px",
+            fontSize:'16px',
+            cursor:'pointer',
+            backgroundColor:'#3490dc',
+            color:'white',
+            border:'none',
+            borderRadius:'4px'
+        };
+        applyStyles(toogleButton, buttonStyles);
+
+        //초기 라이트 모드 적용
+        applyStyles(body, stateDate.styleChange.light);
+    }
+
+    //다크 모드 토글 함수
+    function toggleDarkMode(){
+        if(stateData.isDarkMode){
+            stateData.isDarkMode=false;
+        }else{
+            stateData.isDarkMode=true;
+        }
+        let modeStyles;
+        if(stateData.isDarkMode){
+            modeStyles=stateData.styleChange.dark;
+            toggleButton.textContent="라이트 모드 전환";
+        }else{
+            modeStyles=stateData.styleChange.light;
+            toggleButton.textContent="다크 모드 전환";
+        }
+        applyStyles(body,modeStyles);
+
+        //이전 타이머 취소
+        if(stateData.timeoutId){
+            clearTimeout(stateData.timeoutId);
+        }
+
+        //3초 후 자동 전환 설정
+        stateData.timeoutId=setTimeout(toggleDarkMode,3000);
+    }
+    
+    //이벤트 리스너 등록
+    toggleButton.addEventListener("click",toggleDarkMode);
+
+    //초기 설정
+    setInitialStyles();
+
+    //초기 타이머 설정
+    stateData.timeoutId=setTimeout(toggleDarkMode,3000)
+    </script>
+</body>
+</html>
