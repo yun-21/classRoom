@@ -24,5 +24,9 @@ const closureExample = outerFunction(someData);
 anotehrFunction(); //20
 
 closureExample(); //엥? 왜 15가 아니라 30이지?
+//이유는 안적어둬서 적음
+//그 이유는 클로저때문임. 위에서 notehrFunction를 호출시키면서 전역변수의 값을 20으로 변경하여
+//innerFunction에서 참조하는 outerData가 변경되어 메모리에 저장이 되었기 때문이다.
 
-outerFunction(someData)();
+outerFunction(someData)(); //15
+closureExample(); //위에서 outerDate를 5로 다시 변경 해줬기 때문에 메모리에는 outerData값이 5로 변경되었음.
